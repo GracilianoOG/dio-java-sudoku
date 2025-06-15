@@ -179,7 +179,7 @@ public class Main {
             showBoard();
             board = null;
         } else if(board.hasAnyError()) {
-            System.out.println("Seu jogo contém erros! Verifique a faça os ajustes necessários!");
+            System.out.println("Seu jogo contém erros! Verifique e faça os ajustes necessários!");
         } else {
             System.out.println("Você ainda precisa preencher algum espaço!");
         }
