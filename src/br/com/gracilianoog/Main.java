@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
+import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 import static java.util.stream.Collectors.toMap;
 
@@ -76,6 +77,43 @@ public class Main {
         System.out.println("O jogo está pronto para começar!");
     }
 
+    private static void enterNumber() {
+        if(isNull(board)) {
+            System.out.println("O jogo ainda não foi iniciado!");
+            return;
+        }
+
+        System.out.println("Informe a coluna para inserir o número: ");
+        int col = getValidNumber(0, BOARD_SIZE - 1);
+
+        System.out.println("Informe a linha para inserir o número: ");
+        int row = getValidNumber(0, BOARD_SIZE - 1);
+
+        System.out.printf("Informe o número que será inserido na posição (%s, %s)", col, row);
+        int val = getValidNumber(1, BOARD_SIZE);
+
+        if(!board.changeValue(col, row, val)) {
+            System.out.printf("A posição (%s, %s) tem um valor fixo!\n", col, row);
+        }
+    }
+
+    private static void removeNumber() {
+        if(isNull(board)) {
+            System.out.println("O jogo ainda não foi iniciado!");
+            return;
+        }
+
+        System.out.println("Informe a coluna para inserir o número: ");
+        int col = getValidNumber(0, BOARD_SIZE - 1);
+
+        System.out.println("Informe a linha para inserir o número: ");
+        int row = getValidNumber(0, BOARD_SIZE - 1);
+
+        if(!board.clearValue(col, row)) {
+            System.out.printf("A posição (%s, %s) tem um valor fixo!\n", col, row);
+        }
+    }
+
     private static void finishGame() {
     }
 
@@ -88,9 +126,12 @@ public class Main {
     private static void showBoard() {
     }
 
-    private static void removeNumber() {
-    }
-
-    private static void enterNumber() {
+    private static int getValidNumber(int min, int max) {
+        int current = scanner.nextInt();
+        while(current < min || current > max) {
+            System.out.printf("Informe o número entre %s e %s\n", min, max);
+            current = scanner.nextInt();
+        }
+        return current;
     }
 }
