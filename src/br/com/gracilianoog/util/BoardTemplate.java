@@ -3,6 +3,8 @@ package br.com.gracilianoog.util;
 public final class BoardTemplate {
     public final static String BOARD_TEMPLATE = """
             ----------------------------------------------------
+            ---------------------- SUDOKU ----------------------
+            ----------------------------------------------------
             | [%s] [%s] [%s] | [%s] [%s] [%s] | [%s] [%s] [%s] |
             | [%s] [%s] [%s] | [%s] [%s] [%s] | [%s] [%s] [%s] |
             | [%s] [%s] [%s] | [%s] [%s] [%s] | [%s] [%s] [%s] |
