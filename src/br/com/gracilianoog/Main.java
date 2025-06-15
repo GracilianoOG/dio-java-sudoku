@@ -90,7 +90,7 @@ public class Main {
         System.out.println("Informe a linha para inserir o número: ");
         int row = getValidNumber(0, BOARD_SIZE - 1);
 
-        System.out.printf("Informe o número que será inserido na posição (%s, %s)", col, row);
+        System.out.printf("Informe o número que será inserido na posição (%s, %s) -> ", col, row);
         int val = getValidNumber(1, BOARD_SIZE);
 
         if(!board.changeValue(col, row, val)) {
