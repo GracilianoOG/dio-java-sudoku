@@ -1,13 +1,15 @@
 package br.com.gracilianoog.ui.custom.input;
 
 import br.com.gracilianoog.model.Cell;
+import br.com.gracilianoog.service.EventEnum;
+import br.com.gracilianoog.service.EventListener;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
 
-public class NumberText extends JTextField {
+public class NumberText extends JTextField implements EventListener {
     private final Cell cell;
 
     public NumberText(Cell cell) {
@@ -49,5 +51,12 @@ public class NumberText extends JTextField {
                 cell.setActual(Integer.parseInt(getText()));
             }
         });
+    }
+
+    @Override
+    public void update(EventEnum eventType) {
+        if(eventType.equals(EventEnum.CLEAR_SPACE) && (this.isEnabled())) {
+            this.setText("");
+        }
     }
 }
