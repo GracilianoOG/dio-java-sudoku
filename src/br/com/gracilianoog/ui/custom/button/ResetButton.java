@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 public class ResetButton extends JButton {
     public ResetButton(ActionListener actionListener) {
-        this.setText("Concluir");
+        this.setText("Reiniciar");
         this.addActionListener(actionListener);
     }
 }
