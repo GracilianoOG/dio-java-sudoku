@@ -3,6 +3,8 @@ package br.com.gracilianoog.ui.custom.screen;
 import br.com.gracilianoog.model.Cell;
 import br.com.gracilianoog.model.GameStatus;
 import br.com.gracilianoog.service.BoardService;
+import br.com.gracilianoog.service.EventEnum;
+import br.com.gracilianoog.service.NotifierService;
 import br.com.gracilianoog.ui.custom.button.CheckGameStatusButton;
 import br.com.gracilianoog.ui.custom.button.FinishGameButton;
 import br.com.gracilianoog.ui.custom.button.ResetButton;
@@ -21,6 +23,7 @@ public class MainScreen {
     private final static Dimension dimension = new Dimension(600, 600);
 
     private final BoardService boardService;
+    private final NotifierService notifierService;
 
     private JButton finishGameButton;
     private JButton checkGameStatusButton;
@@ -28,6 +31,7 @@ public class MainScreen {
 
     public MainScreen(Map<String, String> gameConfig) {
         this.boardService = new BoardService(gameConfig);
+        this.notifierService = new NotifierService();
     }
 
     public void buildMainScreen() {
@@ -52,6 +56,7 @@ public class MainScreen {
 
     private JPanel generateCells(List<Cell> cells) {
         List<NumberText> fields = new ArrayList<>(cells.stream().map(NumberText::new).toList());
+        fields.forEach(f -> notifierService.subscribe(EventEnum.CLEAR_SPACE ,f));
         return new SudokuSector(fields);
     }
 
@@ -106,6 +111,7 @@ public class MainScreen {
             );
             if (dialogueResult == 0) {
                 boardService.reset();
+                notifierService.notify(EventEnum.CLEAR_SPACE);
             }
         });
         mainPanel.add(resetButton);
